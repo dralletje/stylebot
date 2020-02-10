@@ -1,0 +1,19 @@
+{
+  "name": "stylebot",
+  "version": "1.0.0",
+  "description": "A Google Chrome extension that allows users to manipulate a web page’s appearance in a WYSIWYG manner.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dralletje/stylebot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dralletje/stylebot/issues"
+  },
+  "homepage": "https://github.com/dralletje/stylebot#readme"
+}

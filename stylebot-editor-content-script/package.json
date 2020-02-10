@@ -1,0 +1,62 @@
+{
+  "name": "stylebot-editor-content-script",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@rescripts/rescript-env": "0.0.11",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "jquery": "^3.4.1",
+    "jquery.tipsy": "^1.0.3",
+    "lodash": "^4.17.15",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.1",
+    "react-shadow": "^17.5.0",
+    "styled-components": "^5.0.1",
+    "tree-sitter-css": "^0.16.0",
+    "web-tree-sitter": "^0.16.0",
+    "webpack": "^4.41.5"
+  },
+  "scripts": {
+    "start": "rescripts start",
+    "build": "(rm -r ../stylebot/build-stylebot-editor-content-script || echo 'No build to remove') && rescripts build && mv build/ ../stylebot/build-stylebot-editor-content-script",
+    "test": "rescripts test",
+    "eject": "rescripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "globals": {
+      "chrome": true,
+      "stylebot": true,
+      "$": true,
+      "Events": true,
+      "Utils": true,
+      "WidgetUI": true,
+      "define": true,
+      "browser": true
+    },
+    "rules": {
+      "no-unused-expressions": 0,
+      "no-undef": 0,
+      "import/no-amd": 0,
+      "no-restricted-globals": 0
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@rescripts/cli": "0.0.13"
+  }
+}
