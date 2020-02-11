@@ -108,10 +108,8 @@ let App = ({ parser, css, onCssChange }) => {
       document.head.appendChild(style_element_ref.current);
     }
 
-    style_element_ref.current.innerHTML = applied_code.replace(
-      /;(\n|$)/gm,
-      " !important;$1"
-    );
+    let css_tweaked = applied_code.replace(/(?:!important)? *;(\n|$)/gm,' !important;$1');
+    style_element_ref.current.innerHTML = css_tweaked;
   }, [applied_code]);
 
   React.useEffect(() => {

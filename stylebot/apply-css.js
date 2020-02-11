@@ -7,7 +7,7 @@
   }
 
   let style = document.createElement("style");
-  style.innerHTML = css.replace(/;(\n|$)/gm,' !important;$1');
+  style.innerHTML = css.replace(/(?:!important)? *;(\n|$)/gm,' !important;$1');
   style.dataset.dralStyled = true;
   document.head.appendChild(style);
 })();

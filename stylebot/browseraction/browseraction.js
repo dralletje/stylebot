@@ -1,25 +1,54 @@
-document.querySelector('#open-editor-button').addEventListener('click', async () => {
-  let [current_tab] = await browser.tabs.query({
-    active: true,
-    currentWindow: true
+let apply_browser_action = async (tabId, action) => {
+  await browser.browserAction.setIcon({
+    tabId: tabId,
+    path: action.icon,
   });
-
-  // TODO sendMessage ?
-  chrome.tabs.sendRequest(current_tab.id, { name: 'toggle' }, function() {});
-
-  window.close();
-})
-
-document.querySelector('#options-button').addEventListener('click', async () => {
-  let [current_tab] = await browser.tabs.query({
-    active: true,
-    currentWindow: true
+  await browser.browserAction.setTitle({
+    tabId: tabId,
+    title: action.title,
   });
+};
 
-  chrome.tabs.create({
-    url: 'options/index.html',
-    active: true
-  });
+let update_button_on_tab = async (tab) => {
+  if ((tab.url.match(/^chrome:\/\//) || tab.url.match(/^https?:\/\/chrome.google.com/))) {
+    await apply_browser_action(tab.id, {
+      icon: `/BrowserAction/Images/Brush-error@2x.png`,
+      title: 'For security reasons, Brush is not supported on this url.',
+    });
+    return;
+  }
 
-  window.close();
-})
+  let host = new URL(tab.url).host;
+  let { [host]: css } = await browser.storage.local.get([host]);
+
+  if (css) {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      await apply_browser_action(tab.id, {
+        icon: `/BrowserAction/Images/Brush@2x.png`,
+        title: 'Brush is doing it\'s best make your page all fancy.',
+      });
+    } else {
+      await apply_browser_action(tab.id, {
+        icon: `/BrowserAction/Images/Brush-light@2x.png`,
+        title: 'Brush is doing it\'s best make your page all fancy.',
+      });
+    }
+  } else {
+    await apply_browser_action(tab.id, {
+      icon: `/BrowserAction/Images/Brush-inactive@2x.png`,
+      title: 'Brush is not applying any custom styles.',
+    });
+  }
+}
+
+browser.runtime.onInstalled.addListener(async () => {
+  let all_tabs = await browser.tabs.query({});
+  for (let tab of all_tabs) {
+    await update_button_on_tab(tab);
+  }
+});
+browser.tabs.onUpdated.addListener(async (tabId, changed, tab) => {
+  if (changed.url != null || changed.status != null) {
+    await update_button_on_tab(tab);
+  }
+});
