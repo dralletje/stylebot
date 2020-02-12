@@ -7,5 +7,8 @@ chrome.runtime.sendMessage({ command: "get-environment" }, (response) => {
     globalThis.dral__get_url = (path) => chrome.runtime.getURL(path);
   }
 
-  import(globalThis.dral__get_url('entry.js'));
+  import(globalThis.dral__get_url('entry.js'))
+  // .catch(err => {
+  //   import(chrome.runtime.getURL('entry.js'));
+  // });
 });

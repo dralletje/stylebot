@@ -1,5 +1,7 @@
 let webpack = require("webpack");
 let HtmlWebpackPlugin = require("html-webpack-plugin");
+let ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+let WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 let HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 
 module.exports = [
@@ -12,7 +14,8 @@ module.exports = [
       // console.log(`hotreplacemement:`, hotreplacemement)
       // hotreplacemement.multiStep = true;
 
-      // webpack_config.plugins = webpack_config.plugins.filter(x => !(x instanceof HotModuleReplacementPlugin));
+      webpack_config.plugins = webpack_config.plugins.filter(x => !(x instanceof ModuleScopePlugin));
+      webpack_config.plugins = webpack_config.plugins.filter(x => !(x instanceof WorkboxWebpackPlugin.GenerateSW));
 
       let html_webpack_plugin = webpack_config.plugins.find(
         x => x instanceof HtmlWebpackPlugin

@@ -5,7 +5,10 @@ document.querySelector('#open-editor-button').addEventListener('click', async ()
   });
 
   // TODO sendMessage ?
-  chrome.tabs.sendRequest(current_tab.id, { name: 'toggle' }, function() {});
+  // chrome.tabs.sendRequest(current_tab.id, { name: 'toggle' }, function() {});
+  console.log('Yes')
+  console.log(`current_tab.id:`, current_tab.id)
+  browser.tabs.sendMessage(current_tab.id, { type: "open-editor" }, (response) => {});
 
   window.close();
 })

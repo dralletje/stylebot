@@ -4,7 +4,8 @@
   "description": "A Google Chrome extension that allows users to manipulate a web page’s appearance in a WYSIWYG manner.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "web-ext run -s extension --url \"https://youtu.be/Yocja_N5s1I\""
   },
   "repository": {
     "type": "git",

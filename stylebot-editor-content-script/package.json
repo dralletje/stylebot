@@ -1,6 +1,7 @@
 {
   "name": "stylebot-editor-content-script",
   "version": "0.1.0",
+  "main": "src/index.js",
   "private": true,
   "dependencies": {
     "@rescripts/rescript-env": "0.0.11",
@@ -20,8 +21,8 @@
     "webpack": "^4.41.5"
   },
   "scripts": {
-    "start": "rescripts start",
-    "build": "(rm -r ../stylebot/build-stylebot-editor-content-script || echo 'No build to remove') && rescripts build && mv build/ ../stylebot/build-stylebot-editor-content-script",
+    "start": "BROWSER=null rescripts start",
+    "build": "(rm -r ../extension/build-stylebot-editor-content-script || echo 'No build to remove') && rescripts build && mv build/ ../extension/build-stylebot-editor-content-script",
     "test": "rescripts test",
     "eject": "rescripts eject"
   },
@@ -29,12 +30,6 @@
     "extends": "react-app",
     "globals": {
       "chrome": true,
-      "stylebot": true,
-      "$": true,
-      "Events": true,
-      "Utils": true,
-      "WidgetUI": true,
-      "define": true,
       "browser": true
     },
     "rules": {

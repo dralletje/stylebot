@@ -7,12 +7,11 @@
   "background": {
     "scripts": [
       "browser-polyfill.min.js",
-      "background-is-in-development.js",
-      "BrowserAction/BrowserAction.js"
+      "Background-entry.js"
     ]
   },
 
-  "options_page": "options/index.html",
+  "options_page": "options/options/index.html",
 
   "content_scripts": [
     {
@@ -30,21 +29,24 @@
   ],
 
   "browser_action": {
+    "browser_style": true,
+    "chrome_style": true,
     "default_icon": {
-      "32": "BrowserAction/Images/css-light-mode.png",
-      "64": "BrowserAction/Images/css-light-mode@2x.png"
+      "32": "BrowserAction/Images/Brush.png",
+      "36": "BrowserAction/Images/Brush@2x.png"
     },
     "default_title": "Brush",
     "default_popup": "BrowserAction-Popup/index.html"
   },
 
   "icons": {
-    "32": "BrowserAction/Images/css-light-mode.png",
-    "34": "BrowserAction/Images/css-light-mode@2x.png"
+    "32": "BrowserAction/Images/Brush.png",
+    "36": "BrowserAction/Images/Brush@2x.png"
   },
 
    "web_accessible_resources": [
-     "build-stylebot-editor-content-script/*"
+     "build-stylebot-editor-content-script/*",
+     "BrowserAction/Images/*"
    ],
 
   "permissions": [

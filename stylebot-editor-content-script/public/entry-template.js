@@ -4,31 +4,31 @@ module.exports = ({
   htmlWebpackPlugin: { files }
 }) => {
   let strip_public_path = path => path.substr(files.publicPath.length);
-  let get_asset = source =>
-    compilation.assets[strip_public_path(source)].source();
+  // let get_asset = source =>
+  //   compilation.assets[strip_public_path(source)].source();
 
-  // each cssFile in htmlWebpackPlugin.files.css
-  //   style !{compilation.assets[cssFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
-  // each jsFile in htmlWebpackPlugin.files.js
-  //   script !{compilation.assets[jsFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
-
-  return `
+  return `{
     /* global chrome */
 
-
-    chrome.extension.onRequest.addListener(async (request, sender, sendResponse) => {
+    console.log('HEY');
+    console.log(\`globalThis.browser:\`, globalThis.browser)
+    console.log(\`globalThis.chrome:\`, globalThis.chrome)
+    let browser = 'browser' in window ? globalThis.browser : globalThis.chrome;
+    browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+      console.log('window !== window.top:', window !== window.top);
+      console.log(\`request:\`, request)
       if (window !== window.top) {
         return;
       }
-      if (request.name === 'toggle') {
+      if (request.type === 'open-editor') {
         ${files.js
           .map(
             path => `
-          await import(globalThis.dral__get_url("${path}"));
-        `
+              await import(globalThis.dral__get_url("${path}"));
+            `
           )
           .join("\n")}
       }
     })
-  `;
+  }`;
 };
