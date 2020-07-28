@@ -6,8 +6,6 @@ import { TextEditor } from "./Editor.js";
 import { RenderObject } from "./parse.js";
 import Highlight from "./Highlight";
 
-import "../../test.js";
-
 let Title = styled.div`
   font-size: 25px;
   padding: 16px;

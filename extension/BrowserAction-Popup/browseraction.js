@@ -8,9 +8,9 @@ document.querySelector('#open-editor-button').addEventListener('click', async ()
   // chrome.tabs.sendRequest(current_tab.id, { name: 'toggle' }, function() {});
   console.log('Yes')
   console.log(`current_tab.id:`, current_tab.id)
-  browser.tabs.sendMessage(current_tab.id, { type: "open-editor" }, (response) => {});
+  chrome.tabs.sendMessage(current_tab.id, { type: "open-editor" });
 
-  window.close();
+  // window.close();
 })
 
 document.querySelector('#options-button').addEventListener('click', async () => {

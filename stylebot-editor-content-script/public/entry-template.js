@@ -10,13 +10,8 @@ module.exports = ({
   return `{
     /* global chrome */
 
-    console.log('HEY');
-    console.log(\`globalThis.browser:\`, globalThis.browser)
-    console.log(\`globalThis.chrome:\`, globalThis.chrome)
     let browser = 'browser' in window ? globalThis.browser : globalThis.chrome;
-    browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-      console.log('window !== window.top:', window !== window.top);
-      console.log(\`request:\`, request)
+    chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
       if (window !== window.top) {
         return;
       }
